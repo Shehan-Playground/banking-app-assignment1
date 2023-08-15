@@ -20,6 +20,7 @@ public class BankingApp {
         final String TRANSFER_MONEY = "Transfer Money";
         final String CHECK_BALANCE = "Check Account Balance";
         final String DROP_ACCOUNT = "Drop Existing Account";
+        final String EXIT = "Exit App";
 
         int[] accountIds = {1,2,3};
         String[] accountNames = {"Suresh Mahanama","Sanath Jayasuriya","Avishka Gunawardene"};
@@ -50,7 +51,7 @@ public class BankingApp {
                         case 4: screen = TRANSFER_MONEY; break;
                         case 5: screen = CHECK_BALANCE; break;
                         case 6: screen = DROP_ACCOUNT; break;
-                        case 7: System.exit(0); break;
+                        case 7: screen = EXIT; break;
                         default:
                     }
                     break;
@@ -163,7 +164,18 @@ public class BankingApp {
                         screen = DASHBOARD;
                         break;
                     }
-               
+
+                case EXIT:
+
+                    System.out.print("\n\tAre you sure you want to exit from App (Y/n)? ");
+                    String answerExit = scanner.nextLine().strip().toUpperCase();
+                    System.out.println();
+                    if (answerExit.equals("Y")) System.exit(0);
+                    else {
+                        screen = DASHBOARD;
+                        break;
+                    }
+
                 default:
             }
                 
