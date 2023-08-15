@@ -5,13 +5,14 @@ public class BankingApp {
     private static Scanner scanner = new Scanner (System.in);
     public static void main(String[] args) {
 
-        final String BLUE_COLOR = "\033[034m";
-        final String RED_COLOR = "\033[031m";
-        final String BOLD = "\033[1m";
+        final String BLUE_COLOR = "\033[034;1m";
+        final String RED_COLOR = "\033[031;1m";
+        final String GREEN_COLOR = "\033[032;1m";
+        // final String BOLD = "\033[1m";
         final String RESET = "\033[0m";
         final String CLEAR = "\033[H\033[2J";
-
-        final String APP_MARGIN = ".repeat((50-%s.length())/2).concat(%s)";
+        final String ERROR_MSG = String.format("\n\t%s%s%s\n", RED_COLOR,"%s",RESET);
+        final String SUCCESS_MSG = String.format("\n\t%s%s%s\n", GREEN_COLOR,"%s",RESET);
         
         final String DASHBOARD = "💰 Welcome to Smart Banking App";
         final String OPEN_ACCOUNT = "Open New Account";
@@ -31,7 +32,7 @@ public class BankingApp {
             final String APPTITLE = screen;
             System.out.println(CLEAR);
             System.out.println(BLUE_COLOR);
-            System.out.println(BOLD);
+            // System.out.println(BOLD);
             System.out.printf(" ".repeat((50-APPTITLE.length())/2).concat(APPTITLE));
             System.out.println(RESET);
 
@@ -67,7 +68,7 @@ public class BankingApp {
                     // Generating account id
                     System.out.printf("[1]. Account ID: SDB-%50d", accountIds[accountIds.length-1]+1);
 
-                    //Validating Account name
+                    //Enter Account name
                     String accountName;
 
                     accountNameLoop:
@@ -78,7 +79,7 @@ public class BankingApp {
 
                         //checking blank content
                         if (accountName.isBlank()){
-                            System.out.printf("%s%sCustomer name cannot be empty%s\n",RED_COLOR,BOLD,RESET);
+                            System.out.printf(ERROR_MSG,"Customer name cannot be empty");
                             valid = false;
                             continue;
                         }
@@ -86,12 +87,27 @@ public class BankingApp {
                         //Checking validity of Account name
                         for (int i = 0; i < accountName.length(); i++) {
                             if (!(Character.isLetter(accountName.charAt(i)) )) {
-                                System.out.printf("%s%sInvalid%s\n",RED_COLOR,BOLD,RESET);
+                                System.out.printf(ERROR_MSG, "Invalid account name");
                                 valid = false;
                                 continue accountNameLoop;
                             }
                         }
+                    } while (!valid);
 
+                    //Enter initial deposit
+                    double accountBalance;
+                    do {
+                        valid = true;
+                        System.out.print("\n[3]. Enter Initial Deposit: Rs.");
+                        accountBalance = scanner.nextDouble();
+        
+                        //Validating initial deposit
+                        if (accountBalance < 5000.00) {
+                            System.out.printf(ERROR_MSG, "Minimum initial deposit Rs.5000.00");
+                            valid = false;
+                            continue;
+                        }
+                        
                     } while (!valid);
 
                 default: System.exit(1);
