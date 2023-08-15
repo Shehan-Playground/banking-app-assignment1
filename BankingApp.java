@@ -21,13 +21,13 @@ public class BankingApp {
         final String CHECK_BALANCE = "Check Account Balance";
         final String DROP_ACCOUNT = "Drop Existing Account";
 
-        String[] accountNum = {"SDB-00001","SDB-00002","SDB-00002"};
-        String[] accountName = {"Suresh Mahanama","Sanath Jayasuriya","Avishka Gunawardene"};
-        String[] accountBalance = {"50000","75000","95000"};
+        int[] accountIds = {1,2,3};
+        String[] accountNames = {"Suresh Mahanama","Sanath Jayasuriya","Avishka Gunawardene"};
+        double[] accountBalances = {50000,75000,95000};
 
         String screen = DASHBOARD;
     
-        // do {
+        do {
             final String APPTITLE = screen;
             System.out.println(CLEAR);
             System.out.println(BLUE_COLOR);
@@ -58,9 +58,21 @@ public class BankingApp {
                     }
                     break;
                 
+                 
+                case OPEN_ACCOUNT:
 
+                    boolean valid;
+                    String customerId;
+
+                    // Generating account id
+                    valid = true;
+                    System.out.printf("[1]. Account ID: SDB-%50d", accountIds[accountIds.length-1]+1);
+
+                default: System.exit(1);
+            }
+                
+ 
+        } while (true);
 
     }
-}
-
 }
