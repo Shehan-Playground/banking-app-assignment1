@@ -65,8 +65,34 @@ public class BankingApp {
                     String customerId;
 
                     // Generating account id
-                    valid = true;
                     System.out.printf("[1]. Account ID: SDB-%50d", accountIds[accountIds.length-1]+1);
+
+                    //Validating Account name
+                    String accountName;
+
+                    accountNameLoop:
+                    do {
+                        valid = true;
+                        System.out.printf("\n[2]. Enter Customer name: ");
+                        accountName = scanner.nextLine().strip();
+
+                        //checking blank content
+                        if (accountName.isBlank()){
+                            System.out.printf("%s%sCustomer name cannot be empty%s\n",RED_COLOR,BOLD,RESET);
+                            valid = false;
+                            continue;
+                        }
+
+                        //Checking validity of Account name
+                        for (int i = 0; i < accountName.length(); i++) {
+                            if (!(Character.isLetter(accountName.charAt(i)) )) {
+                                System.out.printf("%s%sInvalid%s\n",RED_COLOR,BOLD,RESET);
+                                valid = false;
+                                continue accountNameLoop;
+                            }
+                        }
+
+                    } while (!valid);
 
                 default: System.exit(1);
             }
