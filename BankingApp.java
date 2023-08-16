@@ -22,9 +22,13 @@ public class BankingApp {
         final String DROP_ACCOUNT = "Drop Existing Account";
         final String EXIT = "Exit App";
 
-        int[] accountIds = {1,2,3};
-        String[] accountNames = {"Suresh Mahanama","Sanath Jayasuriya","Avishka Gunawardene"};
-        double[] accountBalances = {50000,75000,95000};
+        // int[] accountIds = {1,2,3};
+        // String[] accountNames = {"Suresh Mahanama","Sanath Jayasuriya","Avishka Gunawardene"};
+        // double[] accountBalances = {50000,75000,95000};
+
+        int[] accountIds = new int[0];
+        String[] accountNames = new String[0];
+        double[] accountBalances = new double[0];
 
         String screen = DASHBOARD;
 
@@ -61,7 +65,9 @@ public class BankingApp {
                     boolean valid;
 
                     // Generating account id
-                    int accountId = accountIds[accountIds.length-1]+1;
+                    int accountId;
+                    if (accountIds.length == 0) accountId = 1;
+                    else accountId = accountIds[accountIds.length-1]+1;
                     System.out.printf("\n\t[1]. Account ID: SDB-%05d", accountId);
 
                     //Enter Account name
@@ -176,7 +182,7 @@ public class BankingApp {
                         break;
                     }
 
-                default:
+                default: screen = DASHBOARD;
             }
                 
  
